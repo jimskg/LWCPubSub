@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Account with Contacts" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <lightning-layout vertical-align="end" class="slds-m-bottom_small">
+                <lightning-layout-item flexibility="grow">
+                    <div>
+                        <lightning-input label="Search Accounts with Opportunities" type="search" value={searchKey}
+                            onchange={handleKeyChange}>
+                        </lightning-input>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-p-left_xx-small">
+                    <div>
+                        <lightning-button class="searchButton" label="Search" onclick={handleSearch}>
+                        </lightning-button>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+        <template if:true={account}>
+            <template for:each={account} for:item="acc">
+                <div key={acc.Id}>
+                    <lightning-card title={acc.Name}>
+                        <lightning-layout vertical-align="end" class="slds-m-bottom_small custom-box slds-m-around_small custom-align">
+                            <lightning-layout-item  flexibility="grow">
+                                <div>
+                                    <p>Account Name: {acc.Name}</p>
+                                    <p>Phone: {acc.Mobile_phone__c}</p>
+                                    <p>Email: {acc.Email__c}</p>
+                                    <p>Last Name: {acc.Last_name__c}</p>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-large">
+                                <div> 
+                                    <lightning-button class="searchButton" label="Show Opportunities" onclick={handleOpps} value={acc.Id}></lightning-button>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-card>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>
