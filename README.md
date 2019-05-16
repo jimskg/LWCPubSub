@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SFDX App
 
 ## Dev, Build and Test
@@ -8,6 +7,4 @@
 ## Description of Files and Directories
 
 ## Issues
-=======
 # OurNewProject
->>>>>>> origin/master
