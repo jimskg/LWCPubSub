@@ -7,7 +7,8 @@ export default class LightningExampleInputSearch extends LightningElement {
     @track searchKey = '';
     @track error;
     @track account;
-    // @track accountName;
+    @track errorMsg;
+    kati = [];
     @wire (CurrentPageReference) pageRef;
 
     handleKeyChange(event) {
@@ -19,7 +20,12 @@ export default class LightningExampleInputSearch extends LightningElement {
             .then(result => {
                 this.account = result;
                 this.error = undefined;
-
+                if (Object.keys(result).length){
+                    this.errorMsg = '';
+                }else {
+                    this.errorMsg = '*Could not find any account';
+                    console.log(this.errorMsg);
+                }
             })
             .catch(error => {
                 this.account = undefined;

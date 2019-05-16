@@ -13,3 +13,7 @@
     justify-content: center;
     align-items: center;
 }
+.custom-errorMsg{
+    color: red;
+    text-align: center;
+}
