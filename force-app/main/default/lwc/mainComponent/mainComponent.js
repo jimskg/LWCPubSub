@@ -14,7 +14,6 @@ export default class LightningExampleInputSearch extends LightningElement {
     handleKeyChange(event) {
         this.searchKey = event.target.value;
     }
-
     handleSearch() {
         getData({ searchAccount: this.searchKey })
             .then(result => {
@@ -25,6 +24,7 @@ export default class LightningExampleInputSearch extends LightningElement {
                 }else {
                     this.errorMsg = '*Could not find any account';
                     console.log(this.errorMsg);
+                    fireEvent(this.pageRef, 'findOpportunitiesEventName' , '');
                 }
             })
             .catch(error => {
@@ -32,7 +32,6 @@ export default class LightningExampleInputSearch extends LightningElement {
                 this.error = error;
             });
     }
-
     handleOpps(event) {
         fireEvent(this.pageRef, 'findOpportunitiesEventName' , event.target.value);
     }
