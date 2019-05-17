@@ -34,13 +34,6 @@ export default class DatatableWithInlineEdit extends LightningElement {
         
     }
 
-    handleError() {
-        const showError = new ShowToastEvent({
-            title: 'No Opportunities',
-            message: 'Could not find any Opportunities',
-            variant: 'Error',
-        });
-        this.dispatchEvent(showError);
     }
 
     connectedCallback() {
