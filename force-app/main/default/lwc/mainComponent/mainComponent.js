@@ -34,7 +34,6 @@ export default class LightningExampleInputSearch extends LightningElement {
     }
 
     handleOpps(event) {
-        console.log(event.target.value);
         fireEvent(this.pageRef, 'findOpportunitiesEventName' , event.target.value);
     }
 }

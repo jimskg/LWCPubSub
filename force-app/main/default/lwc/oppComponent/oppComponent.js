@@ -2,6 +2,7 @@ import { LightningElement, track, wire } from 'lwc';
 import { CurrentPageReference } from 'lightning/navigation';
 import { registerListener, unregisterAllListeners, fireEvent } from 'c/pubsub';
 import findOpportunities from '@salesforce/apex/FindOpp.searchOpps';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 const columns = [
     { label: 'OppName', fieldName: 'Name', editable: true },
@@ -14,12 +15,33 @@ export default class DatatableWithInlineEdit extends LightningElement {
     @track columns = columns;
     @track rowOffset = 0;
     searchKey;
-
+    @track opportunities;
     @wire(CurrentPageReference) 
     pageRef;
+    stringOpp;
+
+    // @wire(findOpportunities, { searchOppByAcc: '$searchKey' }) 
+    // opportunities;
 
     @wire(findOpportunities, { searchOppByAcc: '$searchKey' }) 
-    opportunities;
+    LoadOpps(result) {
+        this.opportunities = JSON.parse(JSON.stringify(result)).data; 
+        //console.log(Object.keys());
+        console.log(JSON.parse(JSON.stringify(result)).data);
+        if (true){
+            this.handleError();
+        }
+        
+    }
+
+    handleError() {
+        const showError = new ShowToastEvent({
+            title: 'No Opportunities',
+            message: 'Could not find any Opportunities',
+            variant: 'Error',
+        });
+        this.dispatchEvent(showError);
+    }
 
     connectedCallback() {
         registerListener('findOpportunitiesEventName', this.handleSearchKey, this);
